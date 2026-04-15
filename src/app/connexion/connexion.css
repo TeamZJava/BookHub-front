@@ -1,0 +1,113 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+h1 { font-size: 26px; margin-bottom: 6px; }
+h2 { font-size: 22px; margin-bottom: 32px; }
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label { font-size: 14px; font-weight: 500; }
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.input-mdp {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.input-mdp input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-size: 15px;
+  background: transparent;
+}
+
+.input-mdp button {
+  background: none;
+  border: none;
+  padding: 0 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.erreur {
+  color: red;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-bleu {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btn-bleu:hover { background-color: #1d4ed8; }
+
+.liens {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+a {
+  color: #2563eb;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .page {
+    padding: 40px 16px;
+  }
+
+  .formulaire {
+    gap: 16px;
+  }
+}
