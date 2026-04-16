@@ -1,0 +1,49 @@
+<main class="page">
+  <h1>BookHub 📚</h1>
+  <h2>Connexion</h2>
+
+  <section class="formulaire" aria-label="Formulaire de connexion">
+
+    <div class="champ">
+      <label for="email">Email</label>
+      <input id="email" type="email"
+             [(ngModel)]="email"
+             placeholder="Entrez votre email"
+             autocomplete="email"
+             aria-required="true"
+             aria-describedby="erreur-msg" />
+    </div>
+
+    <div class="champ">
+      <label for="mdp">Mot de passe</label>
+      <div class="input-mdp" role="group" aria-label="Mot de passe">
+        <input id="mdp"
+               [type]="showPassword ? 'text' : 'password'"
+               [(ngModel)]="motDePasse"
+               placeholder="Entrez votre mot de passe"
+               autocomplete="current-password"
+               aria-required="true"
+               aria-describedby="erreur-msg" />
+        <button type="button"
+                (click)="showPassword = !showPassword"
+                [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+          {{ showPassword ? '🙈' : '👁' }}
+        </button>
+      </div>
+    </div>
+
+    @if (erreur) {
+      <p class="erreur" id="erreur-msg" role="alert">Mauvais email ou mot de passe</p>
+    }
+
+    <button class="btn-bleu" (click)="onSubmit()" aria-label="Se connecter">
+      Se connecter
+    </button>
+
+    <div class="liens">
+      <a routerLink="/inscription">Créer un compte</a>
+      <a href="#">Demander à réinitialiser mot de passe</a>
+    </div>
+
+  </section>
+</main>
