@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { RegisterRequest } from '../models/register-request.model';
 
 @Component({
   selector: 'app-inscription',
@@ -28,10 +29,22 @@ export class Inscription {
       this.erreur = 'Les mots de passe ne correspondent pas.';
       return;
     }
+
     if (!this.cgAcceptees) {
       this.erreur = 'Veuillez accepter les conditions générales.';
       return;
     }
-    console.log('Inscription :', this.email);
+
+    const data: RegisterRequest = {
+      email: this.email,
+      password: this.motDePasse,
+      firstName: this.prenom,
+      lastName: this.nom,
+      phone: this.telephone || undefined,
+      tosAcceptationDate: new Date().toISOString()
+    };
+
+    console.log('Inscription :', data);
+    // TODO: appel HTTP vers le back
   }
 }
