@@ -27,7 +27,6 @@
                aria-required="true"
                aria-describedby="erreur-msg"
                required />
-        <p class="legende">* Champs obligatoires</p>
 
         <button type="button"
                 (click)="showPassword = !showPassword"
@@ -40,6 +39,8 @@
     @if (erreur) {
       <p class="erreur" id="erreur-msg" role="alert">Mauvais email ou mot de passe</p>
     }
+
+    <p class="legende">* Champs obligatoires</p>
 
     <button class="btn-bleu" (click)="onSubmit()" aria-label="Se connecter">
       Se connecter
