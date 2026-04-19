@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../auth';
+import { LoginRequest } from '../models/login-request.model';
 
 @Component({
   selector: 'app-connexion',
@@ -15,12 +17,36 @@ export class Connexion {
   showPassword = false;
   erreur = false;
 
+  // injection du service HTTP et du router pour la navigation
+  constructor(private authService: AuthService, private router: Router) {
+  }
+
   onSubmit() {
+    this.erreur = false;
+
+    // vérification des champs avant d'appeler le back
     if (!this.email || !this.motDePasse) {
       this.erreur = true;
-    } else {
-      this.erreur = false;
-      console.log('Connexion avec :', this.email);
+      return;
     }
+
+    const data: LoginRequest = {
+      email: this.email,
+      password: this.motDePasse
+    };
+
+    this.authService.login(data).subscribe({
+      next: (reponse) => {
+        localStorage.setItem('token', reponse.token);
+        this.router.navigate(['/accueil']).then();
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.erreur = true;
+        } else {
+          this.erreur = true;
+        }
+      }
+    });
   }
 }
