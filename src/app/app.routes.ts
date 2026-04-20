@@ -18,4 +18,3 @@ export const routes: Routes = [
   { path: 'profil', component: Profil },
   { path: '**', redirectTo: 'connexion' }
 ];
-];
