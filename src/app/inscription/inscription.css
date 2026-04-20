@@ -15,7 +15,7 @@
 h2 {
   font-size: 22px;
   font-weight: 500;
-  color: #475569;
+  color: var(--text-secondary);
   margin-bottom: 24px;
 }
 
@@ -25,10 +25,10 @@ h2 {
   gap: 18px;
   width: 100%;
   max-width: 560px;
-  background: #ffffff;
+  background: var(--bg-carte);
   border-radius: 16px;
   padding: 40px 48px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--ombre-carte);
 }
 
 .champ-horizontal {
@@ -42,51 +42,56 @@ h2 {
   font-size: 14px;
   font-weight: 500;
   text-align: right;
-  color: #374151;
+  color: var(--text-label);
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="tel"] {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-input);
   border-radius: 8px;
   padding: 10px 14px;
   font-size: 14px;
   width: 100%;
-  background-color: #f8fafc;
+  background-color: var(--bg-input);
+  color: var(--text-primary);
   transition: border-color 0.2s, background-color 0.2s;
 }
 
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  background-color: var(--bg-input-focus);
+}
+
 .erreur-champ {
-  color: #dc2626;
+  color: var(--couleur-erreur);
   font-size: 12px;
   margin-top: 4px;
 }
 
 .requis {
-  color: #dc2626;
+  color: var(--couleur-erreur);
   margin-left: 2px;
-}
-
-input:focus {
-  outline: none;
-  border-color: #2563eb;
-  background-color: #ffffff;
 }
 
 .input-mdp {
   display: flex;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-input);
   border-radius: 8px;
   overflow: hidden;
-  background-color: #f8fafc;
+  background-color: var(--bg-input);
   transition: border-color 0.2s;
 }
 
 .input-mdp:focus-within {
-  border-color: #2563eb;
-  background-color: #ffffff;
+  border-color: var(--border-focus);
+  background-color: var(--bg-input-focus);
 }
 
 .input-mdp input {
@@ -96,6 +101,7 @@ input:focus {
   padding: 10px 14px;
   font-size: 14px;
   background: transparent;
+  color: var(--text-primary);
   width: 0;
 }
 
@@ -105,19 +111,19 @@ input:focus {
   padding: 0 12px;
   cursor: pointer;
   font-size: 16px;
-  color: #94a3b8;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.input-mdp button:hover { color: #475569; }
+.input-mdp button:hover { color: var(--text-secondary); }
 
 .erreur {
-  color: #dc2626;
+  color: var(--couleur-erreur);
   font-size: 13px;
   margin: 0;
   text-align: center;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  background: var(--bg-erreur);
+  border: 1px solid var(--border-erreur);
   border-radius: 6px;
   padding: 8px 12px;
 }
@@ -128,7 +134,7 @@ input:focus {
   align-items: flex-start;
   font-size: 12px;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-cg);
 }
 
 .cg input[type="checkbox"] {
@@ -139,8 +145,14 @@ input:focus {
   height: 14px;
 }
 
+.legende {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
 .btn-bleu {
-  background-color: #2563eb;
+  background-color: var(--couleur-primaire);
   color: white;
   border: none;
   border-radius: 8px;
@@ -153,7 +165,7 @@ input:focus {
   transition: background-color 0.2s, transform 0.1s;
 }
 
-.btn-bleu:hover { background-color: #1d4ed8; }
+.btn-bleu:hover { background-color: var(--couleur-primaire-hover); }
 .btn-bleu:active { transform: scale(0.99); }
 
 .liens {
@@ -162,7 +174,7 @@ input:focus {
 }
 
 a {
-  color: #2563eb;
+  color: var(--couleur-primaire);
   font-size: 14px;
   text-decoration: none;
 }
