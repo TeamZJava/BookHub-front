@@ -1,0 +1,84 @@
+@if (bookDetail; as detail) {
+  <div class="detail-container">
+
+    <div class="book-info">
+      <div class="book-cover">
+        @if (detail.book.coverUrl) {
+          <img [src]="detail.book.coverUrl" [alt]="detail.book.title">
+        } @else {
+          <div class="no-cover"></div>
+        }
+      </div>
+
+      <div class="book-meta">
+        <div class="title-row">
+          <h1>{{ detail.book.title }}</h1>
+          <button class="btn-fav" [class.active]="detail.isFavorite" (click)="toggleFavorite()">&#x2764;</button>
+        </div>
+        <p class="author">{{ detail.book.author }}</p>
+        <p class="isbn">ISBN: {{ detail.book.isbn }}</p>
+        <p class="description">{{ detail.book.description }}</p>
+
+        <div class="tags">
+          <span class="category-tag">Catégorie: {{ detail.book.category }}</span>
+          <span class="availability-tag" [class.available]="detail.book.availableCopies > 0">
+            @if (detail.book.availableCopies > 0) {
+              Disponible <span class="dot green"></span>
+            } @else {
+              Indisponible <span class="dot red"></span>
+            }
+          </span>
+        </div>
+
+        <div class="stats">
+          <span>Exemplaires totaux: {{ detail.book.totalCopies }}</span>
+          <span>Exemplaires disponibles: {{ detail.book.availableCopies }}</span>
+          <span>Note moyenne: &#x2B50; {{ detail.book.avgRating || 0 }}</span>
+        </div>
+
+        @if (message) {
+          <p class="message">{{ message }}</p>
+        }
+
+        @if (detail.book.availableCopies > 0) {
+          <button class="btn-action btn-borrow" (click)="borrow()">Emprunter</button>
+        } @else {
+          <button class="btn-action btn-reserve" (click)="reserve()">Réserver</button>
+        }
+      </div>
+    </div>
+
+    <div class="rating-section">
+      <h2>Votre note</h2>
+      <div class="star-selector">
+        @for (star of stars; track star) {
+          <span class="star" [class.filled]="star <= userRating" (click)="setRating(star)">&#x2605;</span>
+        }
+      </div>
+      <textarea [(ngModel)]="userComment" placeholder="Ajouter un commentaire..." rows="4"></textarea>
+      <button class="btn-action btn-submit" (click)="submitReview()">Soumettre</button>
+    </div>
+
+    <div class="comments-section">
+      <h2>Commentaires</h2>
+      @for (comment of detail.comments; track comment.id) {
+        <div class="comment-card">
+          <div class="comment-header">
+            <strong>{{ comment.firstName }} {{ comment.lastName }}</strong>
+            <span class="comment-date">{{ comment.commentDate | date:'yyyy-MM-dd' }}</span>
+            @if (comment.userRating) {
+              <span class="comment-rating">&#x2B50; {{ comment.userRating }}</span>
+            }
+            @if (comment.reported) {
+              <span class="reported-flag">&#x1F6A9;</span>
+            }
+          </div>
+          <p class="comment-text">{{ comment.comment }}</p>
+        </div>
+      }
+      @if (detail.comments.length === 0) {
+        <p class="no-comments">Aucun commentaire pour le moment.</p>
+      }
+    </div>
+  </div>
+}
