@@ -1,0 +1,102 @@
+<div class="catalogue-container">
+  <div class="filters-row">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="titre / auteur / ISBN"
+        [(ngModel)]="search"
+        (keyup.enter)="onSearch()"
+      />
+    </div>
+    <div class="filter-group">
+      <select [(ngModel)]="sortField" (change)="onFilterChange()">
+        <option value="title">Titre</option>
+        <option value="avgRating">Notes</option>
+        <option value="addedAt">Date d'ajout</option>
+      </select>
+
+      <select [(ngModel)]="availabilityFilter" (change)="onFilterChange()">
+        <option value="">Tous</option>
+        <option value="true">Disponible</option>
+        <option value="false">Indisponible</option>
+      </select>
+
+      <select [(ngModel)]="selectedCategory" (change)="onFilterChange()">
+        <option value="">Catégories</option>
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="book-grid">
+    @for (book of books; track book.id) {
+      <div class="book-card">
+        <div class="card-image">
+          @if (book.coverUrl) {
+            <img [src]="book.coverUrl" [alt]="book.title" />
+          } @else {
+            <div class="no-cover"></div>
+          }
+          <div class="card-actions">
+            <button
+              class="btn-icon btn-favorite"
+              [class.active]="isFavorite(book.id)"
+              (click)="toggleFavorite(book.id, $event)"
+              title="Favori"
+            >
+              &#x2764;
+            </button>
+            @if (canDelete) {
+              <button
+                class="btn-icon btn-delete"
+                (click)="deleteBook(book.id, $event)"
+                title="Supprimer"
+              >
+                &#x1F5D1;
+              </button>
+            }
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ book.title }}</h3>
+          <p class="card-author">{{ book.author }}</p>
+          <p class="card-category">Catégorie: {{ book.category }}</p>
+          <div class="card-footer">
+            <span
+              class="badge"
+              [class.available]="book.availableCopies > 0"
+              [class.unavailable]="book.availableCopies === 0"
+            >
+              @if (book.availableCopies > 0) {
+                <span class="dot green"></span> Disponible
+              } @else {
+                <span class="dot red"></span> Indisponible
+              }
+            </span>
+            <span class="rating">&#x2B50; {{ book.avgRating || 0 }}</span>
+          </div>
+          <button class="btn-detail" (click)="viewDetail(book.id)">Voir détail</button>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (books.length === 0) {
+    <p class="no-results">Aucun livre trouvé.</p>
+  }
+
+  <div class="pagination">
+    <button [disabled]="currentPage === 0" (click)="goToPage(currentPage - 1)">
+      &larr; Précédent
+    </button>
+    @for (page of getPageNumbers(); track page) {
+      <button [class.active]="page === currentPage" (click)="goToPage(page)">{{ page + 1 }}</button>
+    }
+    <button [disabled]="currentPage >= totalPages - 1" (click)="goToPage(currentPage + 1)">
+      Suivant &rarr;
+    </button>
+    <span class="page-info">{{ books.length }}/{{ totalElements }}</span>
+  </div>
+</div>
