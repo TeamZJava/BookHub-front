@@ -6,24 +6,80 @@
   padding: 0;
 }
 
+:root {
+  --bg-page:         #f5f4f0;
+  --bg-carte:        #ffffff;
+  --bg-input:        #f8fafc;
+  --bg-input-focus:  #ffffff;
+  --bg-navbar:       #ffffff;
+  --bg-erreur:       #fef2f2;
+
+  --text-primary:    #1e293b;
+  --text-secondary:  #475569;
+  --text-label:      #374151;
+  --text-muted:      #94a3b8;
+  --text-cg:         #64748b;
+
+  --border-input:    #e2e8f0;
+  --border-navbar:   #e2e8f0;
+  --border-focus:    #2563eb;
+  --border-erreur:   #fecaca;
+
+  --couleur-primaire:       #2563eb;
+  --couleur-primaire-hover: #1d4ed8;
+  --couleur-erreur:         #dc2626;
+
+  --ombre-carte:  0 4px 24px rgba(0, 0, 0, 0.07);
+  --ombre-navbar: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page:         #1a1a1a;
+    --bg-carte:        #242424;
+    --bg-input:        #2d2d2d;
+    --bg-input-focus:  #333333;
+    --bg-navbar:       #111111;
+    --bg-erreur:       #2d1f1f;
+
+    --text-primary:    #e2e8f0;
+    --text-secondary:  #cbd5e1;
+    --text-label:      #cbd5e1;
+    --text-muted: #5e718c;
+    --text-cg:         #94a3b8;
+
+    --border-input:    #3d3d3d;
+    --border-navbar:   #2d2d2d;
+    --border-focus:    #3b82f6;
+    --border-erreur:   #7f1d1d;
+
+    --couleur-primaire:       #3b82f6;
+    --couleur-primaire-hover: #2563eb;
+    --couleur-erreur:         #f87171;
+
+    --ombre-carte:  0 4px 24px rgba(0, 0, 0, 0.3);
+    --ombre-navbar: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
 body {
-  background-color: #f5f4f0;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   font-family: 'Inter', Arial, sans-serif;
 }
 
 .navbar {
   width: 100%;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  background-color: var(--bg-navbar);
+  border-bottom: 1px solid var(--border-navbar);
   padding: 16px 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--ombre-navbar);
 }
 
 .navbar-title {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-primary);
   letter-spacing: 0.5px;
 }
-
