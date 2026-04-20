@@ -32,7 +32,7 @@ gradle bootRun
 ```
 
 - API par défaut : **http://localhost:8080**
-- Si Swagger est activé dans le projet : voir `API-ENDPOINTS.md` à la racine pour les chemins exacts (ex. `/swagger-ui.html` ou équivalent selon version).
+- i Swagger est activé dans le projet : http://localhost:8080/swagger-ui/index.html
 
 ---
 
