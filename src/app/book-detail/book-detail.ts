@@ -2,11 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { BookService } from '../../services/book.service';
-import { FavoriteService } from '../../services/favorite.service';
-import { LoanService } from '../../services/loan.service';
-import { ReservationService } from '../../services/reservation.service';
-import { BookDetailDTO } from '../../models/book-detail.model';
+import { BookService } from '../services/book.service';
+import { FavoriteService } from '../services/favorite.service';
+import { LoanService } from '../services/loan.service';
+import { ReservationService } from '../services/reservation.service';
+import { BookDetailDTO } from '../models/book-detail.model';
 
 @Component({
   selector: 'app-book-detail',
