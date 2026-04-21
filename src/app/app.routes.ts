@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { Routes, Router } from '@angular/router';
-import { Connexion } from './pages/connexion/connexion';
-import { Inscription } from './pages/inscription/inscription';
-import { Catalogue } from './pages/catalogue/catalogue';
-import { BookDetail } from './pages/book-detail/book-detail';
-import { Favoris } from './pages/favoris/favoris';
-import { Dashboard } from './pages/dashboard/dashboard';
-import { Profil } from './pages/profil/profil';
+import { Connexion } from './connexion/connexion';
+import { Inscription } from './inscription/inscription';
+import { Catalogue } from './pcatalogue/catalogue';
+import { BookDetail } from './book-detail/book-detail';
+import { Favoris } from './favoris/favoris';
+import { Dashboard } from './dashboard/dashboard';
+import { Profil } from './profil/profil';
 
 //Stockage sécurisé du token côté client
 //Pour empêcher les utilisateurs non authentifiés d'accéder à certaines pages
