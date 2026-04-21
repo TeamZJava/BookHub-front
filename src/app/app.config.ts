@@ -1,16 +1,33 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http'; // permet de faire des requêtes HTTP
+import { provideHttpClient, withInterceptors, HttpInterceptorFn } from '@angular/common/http'; // permet de faire des requêtes HTTP
+
 import { routes } from './app.routes';
+
+// Interceptor HTTP : ajoute automatiquement "Authorization: Bearer <token>"
+// sur toutes les requêtes vers le back quand l'utilisateur est connecté.
+const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
+  }
+  return next(req);
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
     // capture les erreurs globales du navigateur
     provideBrowserGlobalErrorListeners(),
-    // enregistre les routes de l'application (connexion, inscription...)
+
+    // active la détection de changement via Zone.js (mode "classique")
+    // utile pour que l'UI se rafraîchisse automatiquement après les appels HTTP
+    provideZoneChangeDetection({ eventCoalescing: true }),
+
+    // enregistre les routes de l'application (connexion, inscription, catalogue...)
     provideRouter(routes),
-    // active HttpClient pour toute l'application
+
+    // active HttpClient pour toute l'application + active l'interceptor JWT
     // sans ça, les appels HTTP dans les services ne fonctionnent pas
-    provideHttpClient()
+    provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

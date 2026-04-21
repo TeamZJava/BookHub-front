@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 import { BookDetail } from './book-detail';
 
@@ -8,9 +10,9 @@ describe('BookDetail', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BookDetail]
-    })
-    .compileComponents();
+      imports: [BookDetail],
+      providers: [provideRouter([]), provideHttpClient()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BookDetail);
     component = fixture.componentInstance;
