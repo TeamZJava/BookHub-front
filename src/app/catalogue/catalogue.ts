@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BookService } from '../../services/book.service';
-import { FavoriteService } from '../../services/favorite.service';
-import { AuthService } from '../../services/auth.service';
-import { Book } from '../../models/book.model';
+import { BookService } from '../services/book.service';
+import { FavoriteService } from '../services/favorite.service';
+import { AuthService } from '../services/auth.service';
+import { Book } from '../models/book.model';
 
 @Component({
   selector: 'app-catalogue',
