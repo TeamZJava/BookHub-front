@@ -39,9 +39,7 @@ export class Connexion {
       next: (reponse) => {
         localStorage.setItem('token', reponse.token);
        // this.router.navigate(['/accueil']).then(); -> then() tout seul en suffit pas
-        this.router.navigate(['/catalogue']).then(() => {
-          this.isLoading = false;
-        });
+        this.router.navigate(['/catalogue']).then();
       },
       error: (err) => {
         if (err.status === 401) {

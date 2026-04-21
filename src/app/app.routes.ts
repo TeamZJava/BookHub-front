@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import { Connexion } from './connexion/connexion';
 import { Inscription } from './inscription/inscription';
-import { Catalogue } from './pcatalogue/catalogue';
+import { Catalogue } from './catalogue/catalogue';
 import { BookDetail } from './book-detail/book-detail';
 import { Favoris } from './favoris/favoris';
 import { Dashboard } from './dashboard/dashboard';
