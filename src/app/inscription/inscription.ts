@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { RegisterRequest } from '../models/register-request.model';
-import { AuthService } from '../auth';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-inscription',

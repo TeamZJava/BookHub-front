@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RegisterRequest } from './models/register-request.model';
-import { RegisterResponse } from './models/register-response.model';
-import {LoginRequest} from './models/login-request.model';
-import {LoginResponse} from './models/login-response.model';
+import { RegisterRequest } from '../models/register-request.model';
+import { RegisterResponse } from '../models/register-response.model';
+import {LoginRequest} from '../models/login-request.model';
+import {LoginResponse} from '../models/login-response.model';
 
 // @Injectable Angular peut injecter ce service dans d'autres classes
 // providedIn: 'root' = une seule instance partagée dans toute l'application
