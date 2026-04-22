@@ -34,14 +34,16 @@ export class Navbar implements OnInit {
       document.body.classList.add('dark');
     }
 
-    // TODO: réactiver quand le back aura corrigé la règle HttpMethod.GET sur /api/loans
-    // if (this.isLoggedIn()) {
-    //   this.loanService.isLate().subscribe({
-    //     next: (result) => { this.isLate = result; },
-    //     error: () => { this.isLate = false; },
-    //   });
-    // }
-  }
+   //Méthode appelé automatiquement au chargement du composant
+   //On demande au back si l'user est en retard (dot voyant rouge si true)
+   ngOnInit() {
+     if (this.isLoggedIn()) {
+         this.loanService.isLate().subscribe({
+             next: (result) => { this.isLate = result; },
+             error: () => { this.isLate = false; },
+           });
+         }
+   }
 
   toggleTheme(): void {
     this.isDark = !this.isDark;
