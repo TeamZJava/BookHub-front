@@ -3,7 +3,6 @@
 
   @if (utilisateur) {
 
-    <!-- ── Informations personnelles ── -->
     <section class="carte" aria-label="Informations personnelles">
       <h3>Informations Personnelles</h3>
 
@@ -62,7 +61,6 @@
       </form>
     </section>
 
-    <!-- ── Changement de mot de passe (affiché à la demande) ── -->
     @if (modeMotDePasse) {
       <section class="carte" aria-label="Changement de mot de passe">
         <h3>Changer le mot de passe</h3>
@@ -107,7 +105,6 @@
       </section>
     }
 
-    <!-- ── Messages de retour globaux ── -->
     @if (messageSucces) {
       <p class="succes" role="status">{{ messageSucces }}</p>
     }
@@ -115,7 +112,6 @@
       <p class="erreur" role="alert">{{ messageErreur }}</p>
     }
 
-    <!-- ── Actions ── -->
     <section class="carte actions-principales" aria-label="Actions du compte">
       <h3>Actions</h3>
 
