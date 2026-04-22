@@ -18,7 +18,6 @@ h2 {
   color: var(--text-secondary);
 }
 
-/* ── Carte générique ── */
 .carte {
   width: 100%;
   max-width: 600px;
@@ -41,7 +40,6 @@ h3 {
   padding-bottom: 12px;
 }
 
-/* ── Grille 2 colonnes pour les champs infos ── */
 .grille {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -91,19 +89,16 @@ input:not(:disabled):focus {
   margin-left: 2px;
 }
 
-/* ── Boutons inline (sauvegarder / annuler) ── */
 .actions-edition {
   display: flex;
   gap: 12px;
   margin-top: 4px;
 }
 
-/* ── Actions principales (modifier / mdp / supprimer) ── */
 .actions-principales {
   gap: 12px;
 }
 
-/* ── Boutons ── */
 .btn-bleu {
   background-color: var(--couleur-primaire);
   color: #fff;
@@ -147,7 +142,6 @@ input:not(:disabled):focus {
 }
 .btn-danger:hover { background-color: #b91c1c; }
 
-/* ── Zone de confirmation suppression ── */
 .zone-confirmation {
   display: flex;
   flex-direction: column;
@@ -160,7 +154,6 @@ input:not(:disabled):focus {
   color: var(--couleur-erreur);
 }
 
-/* ── Messages retour ── */
 .succes {
   font-size: 14px;
   color: #16a34a;
