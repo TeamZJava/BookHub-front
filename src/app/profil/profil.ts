@@ -87,8 +87,6 @@ export class Profil implements OnInit {
       password: ''
     }).subscribe({
       next: (data) => {
-        // Le back renvoie un nouveau token — on le remplace dans le localStorage
-        // pour que les prochains appels (dont GET /users/my) utilisent le bon email
         localStorage.setItem('token', data.token);
         this.utilisateur = { ...this.utilisateur!, ...data };
         this.modeEdition = false;
@@ -112,7 +110,6 @@ export class Profil implements OnInit {
       password: this.mdpForm.nouveauMotDePasse
     }).subscribe({
       next: (data) => {
-        // Nouveau token après changement de mot de passe aussi
         localStorage.setItem('token', data.token);
         this.modeMotDePasse = false;
         this.mdpForm = { ancienMotDePasse: '', nouveauMotDePasse: '', confirmation: '' };
