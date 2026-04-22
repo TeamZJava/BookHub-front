@@ -87,7 +87,7 @@ export class Profil implements OnInit {
       password: ''
     }).subscribe({
       next: (data) => {
-        localStorage.setItem('token', data.token);
+        if (data.token) localStorage.setItem('token', data.token);
         this.utilisateur = { ...this.utilisateur!, ...data };
         this.modeEdition = false;
         this.messageSucces = 'Profil mis à jour avec succès.';
@@ -110,7 +110,7 @@ export class Profil implements OnInit {
       password: this.mdpForm.nouveauMotDePasse
     }).subscribe({
       next: (data) => {
-        localStorage.setItem('token', data.token);
+        if (data.token) localStorage.setItem('token', data.token);
         this.modeMotDePasse = false;
         this.mdpForm = { ancienMotDePasse: '', nouveauMotDePasse: '', confirmation: '' };
         this.messageSucces = 'Mot de passe modifié avec succès.';
