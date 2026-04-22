@@ -26,16 +26,13 @@ export class Navbar implements OnInit {
   // Méthode appelé automatiquement au chargement du composant
   // On demande au back si l'user est en retard (dot voyant rouge si true)
   ngOnInit() {
-    if (this.isLoggedIn()) {
-      this.loanService.isLate().subscribe({
-        next: (result) => {
-          this.isLate = result;
-        },
-        error: () => {
-          this.isLate = false;
-        },
-      });
-    }
+    // TODO: réactiver quand ok
+    // if (this.isLoggedIn()) {
+    //   this.loanService.isLate().subscribe({
+    //     next: (result) => { this.isLate = result; },
+    //     error: () => { this.isLate = false; },
+    //   });
+    // }
   }
 
   logout() {
