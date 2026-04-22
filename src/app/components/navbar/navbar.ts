@@ -26,24 +26,22 @@ export class Navbar implements OnInit {
     return this.authService.isLoggedIn();
   }
 
-  ngOnInit() {
-    // restaure le thème sauvegardé au rechargement
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      this.isDark = true;
-      document.body.classList.add('dark');
-    }
+ngOnInit() {
+  // Restaure le thème sauvegardé au rechargement
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    this.isDark = true;
+    document.body.classList.add('dark');
+  }
 
-   //Méthode appelé automatiquement au chargement du composant
-   //On demande au back si l'user est en retard (dot voyant rouge si true)
-   ngOnInit() {
-     if (this.isLoggedIn()) {
-         this.loanService.isLate().subscribe({
-             next: (result) => { this.isLate = result; },
-             error: () => { this.isLate = false; },
-           });
-         }
-   }
+  // Vérifie si l'user a des emprunts en retard
+  if (this.isLoggedIn()) {
+    this.loanService.isLate().subscribe({
+      next: (result) => { this.isLate = result; },
+      error: () => { this.isLate = false; },
+    });
+  }
+}
 
   toggleTheme(): void {
     this.isDark = !this.isDark;
@@ -54,6 +52,7 @@ export class Navbar implements OnInit {
       document.body.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+
   }
 
   logout() {
