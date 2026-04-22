@@ -1,1 +1,150 @@
-<p>profil works!</p>
+<main class="page">
+  <h2>Profil Utilisateur</h2>
+
+  @if (utilisateur) {
+
+    <!-- ── Informations personnelles ── -->
+    <section class="carte" aria-label="Informations personnelles">
+      <h3>Informations Personnelles</h3>
+
+      <form (ngSubmit)="sauvegarderProfil()" #profilForm="ngForm" novalidate>
+        <div class="grille">
+
+          <div class="champ">
+            <label for="email">Email</label>
+            <input id="email" type="email"
+                   [(ngModel)]="form.email"
+                   name="email"
+                   autocomplete="email"
+                   [disabled]="!modeEdition"
+                   required />
+          </div>
+
+          <div class="champ">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" type="text"
+                   [(ngModel)]="form.firstName"
+                   name="firstName"
+                   autocomplete="given-name"
+                   [disabled]="!modeEdition"
+                   required />
+          </div>
+
+          <div class="champ">
+            <label for="nom">Nom</label>
+            <input id="nom" type="text"
+                   [(ngModel)]="form.lastName"
+                   name="lastName"
+                   autocomplete="family-name"
+                   [disabled]="!modeEdition"
+                   required />
+          </div>
+
+          <div class="champ">
+            <label for="telephone">Téléphone</label>
+            <input id="telephone" type="tel"
+                   [(ngModel)]="form.phone"
+                   name="phone"
+                   autocomplete="tel"
+                   [disabled]="!modeEdition" />
+          </div>
+
+        </div>
+
+        <!-- Boutons visibles uniquement en mode édition -->
+        @if (modeEdition) {
+          <div class="actions-edition">
+            <button type="submit" class="btn-bleu">Sauvegarder</button>
+            <button type="button" class="btn-neutre" (click)="annulerEdition()">Annuler</button>
+          </div>
+        }
+
+      </form>
+    </section>
+
+    <!-- ── Changement de mot de passe (affiché à la demande) ── -->
+    @if (modeMotDePasse) {
+      <section class="carte" aria-label="Changement de mot de passe">
+        <h3>Changer le mot de passe</h3>
+
+        <form (ngSubmit)="changerMotDePasse()" #mdpFormRef="ngForm" novalidate>
+          <div class="champ">
+            <label for="ancienMdp">Ancien mot de passe <span class="requis">*</span></label>
+            <input id="ancienMdp" type="password"
+                   [(ngModel)]="mdpForm.ancienMotDePasse"
+                   name="ancienMotDePasse"
+                   autocomplete="current-password"
+                   required />
+          </div>
+
+          <div class="champ">
+            <label for="nouveauMdp">Nouveau mot de passe <span class="requis">*</span></label>
+            <input id="nouveauMdp" type="password"
+                   [(ngModel)]="mdpForm.nouveauMotDePasse"
+                   name="nouveauMotDePasse"
+                   autocomplete="new-password"
+                   required />
+          </div>
+
+          <div class="champ">
+            <label for="confirmMdp">Confirmer le nouveau mot de passe <span class="requis">*</span></label>
+            <input id="confirmMdp" type="password"
+                   [(ngModel)]="mdpForm.confirmation"
+                   name="confirmation"
+                   autocomplete="new-password"
+                   required />
+          </div>
+
+          @if (messageErreurMdp) {
+            <p class="erreur" role="alert">{{ messageErreurMdp }}</p>
+          }
+
+          <div class="actions-edition">
+            <button type="submit" class="btn-bleu">Confirmer</button>
+            <button type="button" class="btn-neutre" (click)="modeMotDePasse = false">Annuler</button>
+          </div>
+        </form>
+      </section>
+    }
+
+    <!-- ── Messages de retour globaux ── -->
+    @if (messageSucces) {
+      <p class="succes" role="status">{{ messageSucces }}</p>
+    }
+    @if (messageErreur) {
+      <p class="erreur" role="alert">{{ messageErreur }}</p>
+    }
+
+    <!-- ── Actions ── -->
+    <section class="carte actions-principales" aria-label="Actions du compte">
+      <h3>Actions</h3>
+
+      @if (!modeEdition) {
+        <button class="btn-bleu" (click)="activerEdition()">Modifier le profil</button>
+      }
+
+      <button class="btn-neutre" (click)="modeMotDePasse = !modeMotDePasse">
+        {{ modeMotDePasse ? 'Annuler le changement de mot de passe' : 'Changer le mot de passe' }}
+      </button>
+
+      <!-- Suppression avec confirmation inline -->
+      @if (!confirmerSuppression) {
+        <button class="btn-danger" (click)="confirmerSuppression = true">Supprimer mon compte</button>
+      } @else {
+        <div class="zone-confirmation" role="alertdialog" aria-label="Confirmation de suppression">
+          <p>Cette action est irréversible. Confirmer la suppression ?</p>
+          <div class="actions-edition">
+            <button class="btn-danger" (click)="supprimerCompte()">Oui, supprimer</button>
+            <button class="btn-neutre" (click)="confirmerSuppression = false">Annuler</button>
+          </div>
+        </div>
+      }
+
+    </section>
+
+  } @else if (!messageErreur) {
+    <!-- Chargement en cours -->
+    <p class="chargement">Chargement du profil…</p>
+  }
+
+</main>
