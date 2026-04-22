@@ -12,8 +12,13 @@
       <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       <a routerLink="/profil" routerLinkActive="active">Profil</a>
     </div>
-    <div class="navbar-right">
-      <button class="btn-logout" (click)="logout()">Déconnexion</button>
-    </div>
   }
+  <div class="navbar-right">
+    <button class="btn-theme" (click)="toggleTheme()" [title]="isDark ? 'Passer en mode clair' : 'Passer en mode sombre'">
+      {{ isDark ? '☀️' : '🌙' }}
+    </button>
+    @if (isLoggedIn()) {
+      <button class="btn-logout" (click)="logout()">Déconnexion</button>
+    }
+  </div>
 </nav>

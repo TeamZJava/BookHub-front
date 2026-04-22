@@ -63,14 +63,23 @@
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
+  color: var(--text-primary);
 }
 
 .btn-logout:hover {
   background: var(--bg-input);
 }
 
-@media (prefers-color-scheme: dark) {
-  .btn-logout {
-    color: var(--couleur-primaire);
-  }
+.btn-theme {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.btn-theme:hover {
+  background: var(--bg-input);
 }

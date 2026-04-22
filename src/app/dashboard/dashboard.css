@@ -208,18 +208,16 @@ h3 {
 .btn-detail:hover { text-decoration: underline; }
 
 /* dark mode — alerte */
-@media (prefers-color-scheme: dark) {
-  .alerte-retard {
-    background: #2d1f1f;
-    border-color: #7f1d1d;
-    color: #f87171;
-  }
-  .btn-fermer { color: #f87171; }
-  .badge-cours  { background: #14532d; color: #4ade80; }
-  .badge-retard { background: #450a0a; color: #f87171; }
-  .meta.retard  { color: #f87171; }
-  .dot-rouge    { color: #f87171; }
+body.dark .alerte-retard {
+  background: #2d1f1f;
+  border-color: #7f1d1d;
+  color: #f87171;
 }
+body.dark .btn-fermer   { color: #f87171; }
+body.dark .badge-cours  { background: #14532d; color: #4ade80; }
+body.dark .badge-retard { background: #450a0a; color: #f87171; }
+body.dark .meta.retard  { color: #f87171; }
+body.dark .dot-rouge    { color: #f87171; }
 
 /* responsive */
 @media (max-width: 900px) {
