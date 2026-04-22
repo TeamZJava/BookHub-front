@@ -1,1 +1,30 @@
-<p>favoris works!</p>
+<main class="page">
+  <h2>Mes Favoris ⭐</h2>
+
+  @if (favoris.length === 0) {
+    <p class="vide">Aucun favori pour le moment.</p>
+  } @else {
+    <div class="grille-livres">
+      @for (livre of favoris; track livre.id) {
+        <div class="carte-livre">
+          <div class="couverture">
+            @if (livre.coverUrl) {
+              <img [src]="livre.coverUrl" [alt]="livre.title" />
+            } @else {
+              <div class="no-cover"></div>
+            }
+          </div>
+          <div class="infos-livre">
+            <span class="titre-livre">{{ livre.title }}</span>
+            <span class="auteur">{{ livre.author }}</span>
+            <div class="pied-livre">
+              <span class="note">⭐ {{ livre.avgRating | number:'1.1-1' }}</span>
+              <a [routerLink]="['/books', livre.id]" class="btn-detail">Détail</a>
+            </div>
+            <button class="btn-retirer" (click)="supprimerFavori(livre.id)">✕ Retirer</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</main>
