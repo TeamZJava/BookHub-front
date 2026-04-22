@@ -18,21 +18,40 @@ export class Navbar implements OnInit {
   // true = l'utilisateur a au moins un emprunt en retard (dot rouge)
   isLate = false;
 
+  // true = dark mode actif
+  isDark = false;
+
   // Sert dans le HTML pour afficher les liens selon la connexion
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  // Méthode appelé automatiquement au chargement du composant
-  // On demande au back si l'user est en retard (dot voyant rouge si true)
   ngOnInit() {
-    // TODO: réactiver quand ok
+    // restaure le thème sauvegardé au rechargement
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      this.isDark = true;
+      document.body.classList.add('dark');
+    }
+
+    // TODO: réactiver quand le back aura corrigé la règle HttpMethod.GET sur /api/loans
     // if (this.isLoggedIn()) {
     //   this.loanService.isLate().subscribe({
     //     next: (result) => { this.isLate = result; },
     //     error: () => { this.isLate = false; },
     //   });
     // }
+  }
+
+  toggleTheme(): void {
+    this.isDark = !this.isDark;
+    if (this.isDark) {
+      document.body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
   }
 
   logout() {

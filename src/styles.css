@@ -33,33 +33,31 @@
   --ombre-navbar: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-page:         #1a1a1a;
-    --bg-carte:        #242424;
-    --bg-input:        #2d2d2d;
-    --bg-input-focus:  #333333;
-    --bg-navbar:       #111111;
-    --bg-erreur:       #2d1f1f;
+body.dark {
+  --bg-page:         #1a1a1a;
+  --bg-carte:        #242424;
+  --bg-input:        #2d2d2d;
+  --bg-input-focus:  #333333;
+  --bg-navbar:       #111111;
+  --bg-erreur:       #2d1f1f;
 
-    --text-primary:    #e2e8f0;
-    --text-secondary:  #cbd5e1;
-    --text-label:      #cbd5e1;
-    --text-muted:      #94a3b8;
-    --text-cg:         #94a3b8;
+  --text-primary:    #e2e8f0;
+  --text-secondary:  #cbd5e1;
+  --text-label:      #cbd5e1;
+  --text-muted:      #94a3b8;
+  --text-cg:         #94a3b8;
 
-    --border-input:    #3d3d3d;
-    --border-navbar:   #2d2d2d;
-    --border-focus:    #3b82f6;
-    --border-erreur:   #7f1d1d;
+  --border-input:    #3d3d3d;
+  --border-navbar:   #2d2d2d;
+  --border-focus:    #3b82f6;
+  --border-erreur:   #7f1d1d;
 
-    --couleur-primaire:       #3b82f6;
-    --couleur-primaire-hover: #2563eb;
-    --couleur-erreur:         #f87171;
+  --couleur-primaire:       #3b82f6;
+  --couleur-primaire-hover: #2563eb;
+  --couleur-erreur:         #f87171;
 
-    --ombre-carte:  0 4px 24px rgba(0, 0, 0, 0.3);
-    --ombre-navbar: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
+  --ombre-carte:  0 4px 24px rgba(0, 0, 0, 0.3);
+  --ombre-navbar: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 body {
