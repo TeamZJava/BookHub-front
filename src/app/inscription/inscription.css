@@ -20,15 +20,18 @@ h2 {
 }
 
 .formulaire {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
   width: 100%;
   max-width: 560px;
   background: var(--bg-carte);
   border-radius: 16px;
   padding: 40px 48px;
   box-shadow: var(--ombre-carte);
+}
+
+.formulaire form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .champ-horizontal {

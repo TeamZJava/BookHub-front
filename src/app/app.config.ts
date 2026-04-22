@@ -8,7 +8,10 @@ import { routes } from './app.routes';
 // sur toutes les requêtes vers le back quand l'utilisateur est connecté.
 const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('token');
-  if (token) {
+  // On n'ajoute pas le token sur les routes d'authentification
+  // (login / register n'ont pas besoin d'être authentifiées)
+  const isAuthRoute = req.url.includes('/api/auth/');
+  if (token && !isAuthRoute) {
     req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
   }
   return next(req);

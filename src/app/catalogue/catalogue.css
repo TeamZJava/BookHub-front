@@ -28,6 +28,7 @@
   border-radius: 6px;
   font-size: 0.95rem;
   background-color: var(--bg-input);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
@@ -50,6 +51,7 @@
   border-radius: 6px;
   font-size: 0.9rem;
   background-color: var(--bg-input);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -238,6 +240,7 @@
   padding: 8px 14px;
   border: 1px solid var(--border-input);
   background: var(--bg-carte);
+  color: var(--text-primary);
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;

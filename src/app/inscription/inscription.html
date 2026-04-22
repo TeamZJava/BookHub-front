@@ -2,6 +2,7 @@
   <h2>Inscription</h2>
 
   <section class="formulaire" aria-label="Formulaire d'inscription">
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
 
     <div class="champ-horizontal">
       <label for="nom">Nom <span class="requis">*</span></label>
@@ -64,6 +65,7 @@
                aria-required="true"
                required />
         <button type="button"
+                tabindex="-1"
                 (click)="showPassword = !showPassword"
                 [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
           &#128065;
@@ -83,6 +85,7 @@
                aria-required="true"
                required />
         <button type="button"
+                tabindex="-1"
                 (click)="showConfirm = !showConfirm"
                 [attr.aria-label]="showConfirm ? 'Masquer la confirmation' : 'Afficher la confirmation'">
           &#128065;
@@ -108,7 +111,7 @@
 
     <p class="legende">* Champs obligatoires</p>
 
-    <button class="btn-bleu" (click)="onSubmit()" aria-label="Créer mon compte">
+    <button type="submit" class="btn-bleu" aria-label="Créer mon compte">
       Créer compte
     </button>
 
@@ -116,5 +119,6 @@
       <a routerLink="/connexion">Retour connexion</a>
     </div>
 
+    </form>
   </section>
 </main>

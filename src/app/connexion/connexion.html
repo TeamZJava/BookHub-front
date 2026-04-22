@@ -2,54 +2,57 @@
   <h2>Connexion</h2>
 
   <section class="formulaire" aria-label="Formulaire de connexion">
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
 
-    <div class="champ">
-      <label for="email">Email <span class="requis">*</span></label>
-      <input id="email" type="email"
-             [(ngModel)]="email"
-             name="email"
-             placeholder="Entrez votre email"
-             autocomplete="email"
-             aria-required="true"
-             aria-describedby="erreur-msg"
-             required />
-    </div>
-
-    <div class="champ">
-      <label for="mdp">Mot de passe <span class="requis">*</span></label>
-      <div class="input-mdp" role="group" aria-label="Mot de passe">
-        <input id="mdp"
-               [type]="showPassword ? 'text' : 'password'"
-               [(ngModel)]="motDePasse"
-               name="motDePasse"
-               placeholder="Entrez votre mot de passe"
-               autocomplete="current-password"
+      <div class="champ">
+        <label for="email">Email <span class="requis">*</span></label>
+        <input id="email" type="email"
+               [(ngModel)]="email"
+               name="email"
+               placeholder="Entrez votre email"
+               autocomplete="username"
                aria-required="true"
                aria-describedby="erreur-msg"
                required />
-
-        <button type="button"
-                (click)="showPassword = !showPassword"
-                [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
-          &#128065;
-        </button>
       </div>
-    </div>
 
-    @if (erreur) {
-      <p class="erreur" id="erreur-msg" role="alert">Mauvais email ou mot de passe</p>
-    }
+      <div class="champ">
+        <label for="mdp">Mot de passe <span class="requis">*</span></label>
+        <div class="input-mdp" role="group" aria-label="Mot de passe">
+          <input id="mdp"
+                 [type]="showPassword ? 'text' : 'password'"
+                 [(ngModel)]="motDePasse"
+                 name="motDePasse"
+                 placeholder="Entrez votre mot de passe"
+                 autocomplete="current-password"
+                 aria-required="true"
+                 aria-describedby="erreur-msg"
+                 required />
 
-    <p class="legende">* Champs obligatoires</p>
+          <button type="button"
+                  tabindex="-1"
+                  (click)="showPassword = !showPassword"
+                  [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+            &#128065;
+          </button>
+        </div>
+      </div>
 
-    <button class="btn-bleu" (click)="onSubmit()" aria-label="Se connecter">
-      Se connecter
-    </button>
+      @if (erreur) {
+        <p class="erreur" id="erreur-msg" role="alert">Mauvais email ou mot de passe</p>
+      }
 
-    <div class="liens">
-      <a routerLink="/inscription">Créer un compte</a>
-      <a href="#">Demander à réinitialiser mot de passe</a>
-    </div>
+      <p class="legende">* Champs obligatoires</p>
 
+      <button type="submit" class="btn-bleu" aria-label="Se connecter">
+        Se connecter
+      </button>
+
+      <div class="liens">
+        <a routerLink="/inscription">Créer un compte</a>
+        <a href="#">Demander à réinitialiser mot de passe</a>
+      </div>
+
+    </form>
   </section>
 </main>
