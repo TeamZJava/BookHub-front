@@ -1,1 +1,97 @@
-<p>dashboard works!</p>
+<main class="page">
+  <h2>Mon Tableau de Bord</h2>
+
+  @if (alerteRetard && !alerteFermee) {
+    <div class="alerte-retard" role="alert">
+      <span>⚠️ Vous avez {{ nbRetards }} livre{{ nbRetards > 1 ? 's' : '' }} en retard. Votre compte est bloqué pour de nouveaux emprunts.</span>
+      <button class="btn-fermer" (click)="alerteFermee = true" aria-label="Fermer l'alerte">✕</button>
+    </div>
+  }
+
+  <div class="grille-principale">
+
+    <!-- emprunts en cours -->
+    <section class="carte" aria-label="Mes emprunts en cours">
+      <h3>Mes Emprunts en Cours <span class="max">(Max 3)</span></h3>
+      <p class="sous-titre">Durée d'emprunt : 14 jours</p>
+
+      @if (empruntsActifs.length === 0) {
+        <p class="vide">Aucun emprunt en cours.</p>
+      }
+
+      @for (emprunt of empruntsActifs; track emprunt.id) {
+        <div class="ligne-emprunt">
+          <div class="infos-emprunt">
+            <span class="titre-livre">{{ emprunt.book.title }}</span>
+            <span class="meta">Emprunté le {{ formaterDate(emprunt.loanDate) }}</span>
+            <span class="meta" [class.retard]="emprunt.status === 'OVERDUE'">
+              Date de retour : {{ formaterDate(emprunt.dueDate) }}
+              @if (emprunt.status === 'OVERDUE') { <span class="dot-rouge">●</span> }
+            </span>
+          </div>
+          <span class="badge" [class.badge-retard]="emprunt.status === 'OVERDUE'" [class.badge-cours]="emprunt.status === 'ACTIVE'">
+            {{ emprunt.status === 'OVERDUE' ? 'RETARD' : 'EN COURS' }}
+          </span>
+        </div>
+      }
+    </section>
+
+    <!-- TODO: resa en cours
+    <section class="carte" aria-label="Mes réservations">
+      <h3>Mes Réservations <span class="max">(Max 5)</span></h3>
+      <p class="vide">Fonctionnalité à venir.</p>
+    </section> -->
+
+  </div>
+
+  <!-- favoris -->
+  <section class="carte" aria-label="Mes favoris">
+    <h3>Mes Favoris ⭐</h3>
+
+    @if (favoris.length === 0) {
+      <p class="vide">Aucun favori pour le moment.</p>
+    }
+
+    <div class="grille-livres">
+      @for (livre of favoris; track livre.id) {
+        <div class="carte-livre">
+          <div class="couverture">
+            @if (livre.coverUrl) {
+              <img [src]="livre.coverUrl" [alt]="livre.title" />
+            } @else {
+              <div class="no-cover"></div>
+            }
+          </div>
+          <div class="infos-livre">
+            <span class="titre-livre">{{ livre.title }}</span>
+            <span class="auteur">{{ livre.author }}</span>
+            <div class="pied-livre">
+              <span class="note">⭐ {{ livre.avgRating | number:'1.1-1' }}</span>
+              <a [routerLink]="['/catalogue', livre.id]" class="btn-detail">Détail</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- historique -->
+  <section class="carte" aria-label="Historique des livres lus">
+    <h3>Historique des Livres Lus</h3>
+
+    @if (historique.length === 0) {
+      <p class="vide">Aucun livre retourné pour le moment.</p>
+    }
+
+    @for (emprunt of historique; track emprunt.id) {
+      <div class="ligne-historique">
+        <div class="infos-emprunt">
+          <span class="titre-livre">{{ emprunt.book.title }}</span>
+          <span class="meta">Retourné le {{ formaterDate(emprunt.returnDate) }}</span>
+        </div>
+        <span class="badge badge-retourne">RETOURNÉ</span>
+      </div>
+    }
+  </section>
+
+</main>

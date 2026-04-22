@@ -207,6 +207,7 @@ textarea {
   box-sizing: border-box;
   font-family: inherit;
   background-color: var(--bg-input);
+  color: var(--text-primary);
 }
 
 textarea:focus {

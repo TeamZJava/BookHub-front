@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { LoanDTO } from '../models/loan-dto.model';
 
 @Injectable({ providedIn: 'root' })
 export class LoanService {
@@ -16,7 +17,9 @@ export class LoanService {
     });
   }
 
-  // à compléter pour rendre visible les emprunts en cours ou en retard dans le dashboard...
+  getMyLoans() {
+    return this.http.get<LoanDTO[]>(`${this.apiUrl}/my`);
+  }
 
   // Demande au back si l'utilisateur connecté a un retard pour déterminer la couleur du voyant dot
   isLate() {
