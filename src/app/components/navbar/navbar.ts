@@ -11,7 +11,7 @@ import { LoanService } from '../../services/loan.service';
 })
 export class Navbar implements OnInit {
   // injections :Auth pour connexion / Loan pour retard / Router pour la navigation
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
   private loanService = inject(LoanService);
   private router = inject(Router);
 
