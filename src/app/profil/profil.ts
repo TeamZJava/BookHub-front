@@ -99,7 +99,14 @@ export class Profil implements OnInit {
     });
   }
 
+  private readonly MDP_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{12,}$/;
+  private readonly MDP_REGLES = 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.';
+  
   changerMotDePasse(): void {
+    if (!this.MDP_REGEX.test(this.mdpForm.nouveauMotDePasse)) {
+      this.messageErreurMdp = this.MDP_REGLES;
+      return;
+    }
     if (this.mdpForm.nouveauMotDePasse !== this.mdpForm.confirmation) {
       this.messageErreurMdp = 'Les mots de passe ne correspondent pas.';
       return;
