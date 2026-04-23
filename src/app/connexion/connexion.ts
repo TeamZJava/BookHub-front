@@ -49,4 +49,8 @@ export class Connexion {
       }
     });
   }
+
+  demanderReinitialisationMotDePasse(): void {
+    alert('Notification envoyée.');
+  }
 }
