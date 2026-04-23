@@ -86,7 +86,7 @@
             <span class="auteur">{{ livre.author }}</span>
             <div class="pied-livre">
               <span class="note">⭐ {{ livre.avgRating | number:'1.1-1' }}</span>
-              <a [routerLink]="['/catalogue', livre.id]" class="btn-detail">Détail</a>
+              <a [routerLink]="['/books', livre.id]" class="btn-detail">Détail</a>
             </div>
           </div>
         </div>
