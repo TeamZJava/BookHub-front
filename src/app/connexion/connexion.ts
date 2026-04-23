@@ -37,8 +37,7 @@ export class Connexion {
 
     this.authService.login(data).subscribe({
       next: (reponse) => {
-        localStorage.setItem('token', reponse.token);
-       // this.router.navigate(['/accueil']).then(); -> then() tout seul en suffit pas
+        this.authService.saveToken(reponse.token);
         this.router.navigate(['/catalogue']).then();
       },
       error: (err) => {
