@@ -1,0 +1,119 @@
+<main class="page">
+  <h2>Dashboard Bibliothécaire</h2>
+
+  <section class="carte" aria-label="Statistiques">
+    <div class="stats-row">
+      <div class="stat-card">
+        <p class="stat-value">{{ totalLivres }}</p>
+        <p class="stat-label">Total Livres</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-value green">{{ empruntsActifs }}</p>
+        <p class="stat-label">Emprunts Actifs</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-value red">{{ retards }}</p>
+        <p class="stat-label">Retards</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-value purple">{{ totalUtilisateurs }}</p>
+        <p class="stat-label">Utilisateurs Enregistrés</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="grille-principale">
+
+    <section class="carte" aria-label="Livres en retard">
+      <h3>Livres en Retard <span class="max">({{ listeRetards.length }})</span></h3>
+
+      @if (listeRetards.length === 0) {
+        <p class="vide">Aucun retard.</p>
+      } @else {
+        @for (emprunt of listeRetards; track emprunt.id) {
+          <div class="carte-retard">
+            <div class="infos-emprunt">
+              <span class="titre-livre">{{ emprunt.book.title }}</span>
+              <span class="meta">Emprunteur : {{ emprunt.user.firstName }} {{ emprunt.user.lastName }}</span>
+              <span class="meta retard">Date de retour : {{ emprunt.dueDate | date:'yyyy-MM-dd' }}</span>
+            </div>
+            <button class="btn-warn" (click)="relancerUtilisateur(emprunt.id)">Relancer</button>
+          </div>
+        }
+      }
+    </section>
+
+    <section class="carte" aria-label="Actions rapides">
+      <h3>Actions Rapides</h3>
+      <div class="grille-actions">
+        <button class="btn-action bleu"   (click)="ajouterLivre()">✚ Ajouter Livre</button>
+        <button class="btn-action vert"   (click)="enregistrerRetour()">↩ Retour Livre</button>
+        <button class="btn-action orange" (click)="gererCatalogue()">Gérer Catalogue</button>
+        <button class="btn-action violet" (click)="gererUtilisateurs()">Gérer Utilisateurs</button>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="carte" aria-label="Emprunts actifs">
+    <h3>Emprunts Actifs <span class="max">({{ listeEmprunts.length }})</span></h3>
+
+    @if (listeEmprunts.length === 0) {
+      <p class="vide">Aucun emprunt actif.</p>
+    } @else {
+      <table class="tableau">
+        <thead>
+          <tr>
+            <th>Livre</th>
+            <th>Emprunteur</th>
+            <th>Date Emprunt</th>
+            <th>Date Retour Prévue</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (emprunt of listeEmprunts; track emprunt.id) {
+            <tr>
+              <td>{{ emprunt.book.title }}</td>
+              <td>{{ emprunt.user.firstName }} {{ emprunt.user.lastName }}</td>
+              <td>{{ emprunt.loanDate | date:'yyyy-MM-dd' }}</td>
+              <td>{{ emprunt.dueDate | date:'yyyy-MM-dd' }}</td>
+              <td>
+                <span [class]="estEnRetard(emprunt) ? 'statut rouge' : 'statut vert'">
+                  {{ estEnRetard(emprunt) ? 'RETARD' : 'EN COURS' }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+
+  <!-- TODO: faire top livres -->
+  <section class="carte" aria-label="Top livres">
+    <h3>Top 10 Livres <span class="max">(30 derniers jours)</span></h3>
+
+    @if (topLivres.length === 0) {
+      <p class="vide">Aucune donnée disponible.</p>
+    } @else {
+      <div class="grille-livres">
+        @for (livre of topLivres; track livre.id) {
+          <div class="carte-livre">
+            <div class="couverture">
+              @if (livre.coverUrl) {
+                <img [src]="livre.coverUrl" [alt]="livre.title" />
+              } @else {
+                <div class="no-cover"></div>
+              }
+            </div>
+            <p class="titre-livre-mini">{{ livre.title }}</p>
+            <p class="meta-livre">{{ livre.author }}</p>
+            <p class="meta-livre">{{ livre.borrowCount }} emprunts</p>
+          </div>
+        }
+      </div>
+    }
+  </section>
+
+</main>
