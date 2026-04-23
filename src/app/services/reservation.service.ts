@@ -1,20 +1,23 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ReservationDTO } from '../models/reservation-dto.model';
 
 @Injectable({ providedIn: 'root' })
 export class ReservationService {
-  // HttpClient : permet de faire des requêtes HTTP vers le back
   private http = inject(HttpClient);
-
-  // URL de base de l'API des réservations
   private readonly apiUrl = 'http://localhost:8080/api/reservations';
 
   // Réserver un livre (envoie le bookId en paramètre)
+  // responseType: 'text' évite une erreur de parsing JSON si le back retourne du texte brut ou un MessageResponse
   reserve(bookId: number) {
-    return this.http.post<void>(this.apiUrl, null, {
+    return this.http.post(this.apiUrl, null, {
       params: new HttpParams().set('bookId', bookId.toString()),
+      responseType: 'text'
     });
   }
 
-  // à compléter : récpérer la liste des réservations de l'user pour son dashboard par exemple
+  // Réservations en cours de l'utilisateur connecté
+  getMyReservations() {
+    return this.http.get<ReservationDTO[]>(`${this.apiUrl}/my`);
+  }
 }

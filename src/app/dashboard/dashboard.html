@@ -36,11 +36,30 @@
       }
     </section>
 
-    <!-- TODO: resa en cours
+    <!-- réservations en cours -->
     <section class="carte" aria-label="Mes réservations">
       <h3>Mes Réservations <span class="max">(Max 5)</span></h3>
-      <p class="vide">Fonctionnalité à venir.</p>
-    </section> -->
+
+      @if (reservations.length === 0) {
+        <p class="vide">Aucune réservation en cours.</p>
+      }
+
+      @for (resa of reservations; track resa.id) {
+        <div class="ligne-emprunt">
+          <div class="infos-emprunt">
+            <span class="titre-livre">{{ resa.book.title }}</span>
+            <span class="meta">Réservé le {{ formaterDate(resa.reservationDate) }}</span>
+            <span class="meta">Position dans la file : {{ resa.rankInLine }}</span>
+          </div>
+          <span class="badge"
+            [class.badge-resa-attente]="resa.status === 'PENDING'"
+            [class.badge-resa-dispo]="resa.status === 'AVAILABLE'"
+            [class.badge-resa-annule]="resa.status === 'CANCELED'">
+            {{ resa.status === 'PENDING' ? 'EN ATTENTE' : resa.status === 'AVAILABLE' ? 'DISPONIBLE' : 'ANNULÉ' }}
+          </span>
+        </div>
+      }
+    </section>
 
   </div>
 

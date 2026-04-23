@@ -3,7 +3,9 @@ import { RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { LoanService } from '../services/loan.service';
 import { FavoriteService } from '../services/favorite.service';
+import { ReservationService } from '../services/reservation.service';
 import { LoanDTO } from '../models/loan-dto.model';
+import { ReservationDTO } from '../models/reservation-dto.model';
 import { Book } from '../models/book.model';
 
 @Component({
@@ -18,17 +20,20 @@ export class Dashboard implements OnInit {
   empruntsActifs: LoanDTO[] = [];
   historique: LoanDTO[] = [];
   favoris: Book[] = [];
+  reservations: ReservationDTO[] = [];
   alerteRetard = false;
   alerteFermee = false;
 
   constructor(
     private loanService: LoanService,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private reservationService: ReservationService
   ) {}
 
   ngOnInit(): void {
     this.chargerEmprunts();
     this.chargerFavoris();
+    this.chargerReservations();
   }
 
   chargerEmprunts(): void {
@@ -44,6 +49,12 @@ export class Dashboard implements OnInit {
   chargerFavoris(): void {
     this.favoriteService.getFavorites().subscribe({
       next: (livres) => this.favoris = livres
+    });
+  }
+
+  chargerReservations(): void {
+    this.reservationService.getMyReservations().subscribe({
+      next: (resa) => this.reservations = resa
     });
   }
 
