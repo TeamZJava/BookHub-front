@@ -21,6 +21,14 @@ export class LoanService {
     return this.http.get<LoanDTO[]>(`${this.apiUrl}/my`);
   }
 
+    getAllLoans() {
+    return this.http.get<LoanDTO[]>(this.apiUrl);
+  }
+
+    returnBook(loanId: number) {
+    return this.http.put<void>(`${this.apiUrl}/${loanId}/return`, null);
+  }
+  
   // Demande au back si l'utilisateur connecté a un retard pour déterminer la couleur du voyant dot
   isLate() {
     return this.http.get<boolean>(`${this.apiUrl}/is-late`);
