@@ -70,6 +70,7 @@ src/
 │   ├── inscription/                  → page d'inscription
 │   ├── profil/                       → page profil utilisateur
 │   ├── dashboard/                    → tableau de bord utilisateur
+│   ├── dashboard-librarian/          → tableau de bord bibliothécaire
 │   ├── catalogue/                    → liste des livres
 │   ├── book-detail/                  → détail d'un livre
 │   ├── favoris/                      → liste des favoris
