@@ -50,7 +50,7 @@
 
       <div class="liens">
         <a routerLink="/inscription">Créer un compte</a>
-        <a href="#">Demander à réinitialiser mot de passe</a>
+        <a href="#" (click)="$event.preventDefault(); demanderReinitialisationMotDePasse()">Demander à réinitialiser mot de passe</a>
       </div>
 
     </form>
