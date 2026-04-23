@@ -137,7 +137,7 @@ h3 {
 .titre-livre {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: rgb(146, 47, 47);
 }
 
 .meta {
