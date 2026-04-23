@@ -9,7 +9,11 @@
     <div class="navbar-links">
       <a routerLink="/catalogue" routerLinkActive="active">Catalogue</a>
       <a routerLink="/favoris" routerLinkActive="active">Favoris</a>
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      @if (authService.hasRole('LIBRARIAN')) {
+        <a routerLink="/dashboard-librarian" routerLinkActive="active">Dashboard</a>
+      } @else {
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      }
       <a routerLink="/profil" routerLinkActive="active">Profil</a>
     </div>
   }
