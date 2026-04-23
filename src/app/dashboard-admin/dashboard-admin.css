@@ -1,0 +1,171 @@
+:host { display: block; width: 100%; }
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 24px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+/* Carte blanche réutilisable */
+.section {
+  background: var(--bg-carte);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--ombre-carte);
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+/* ─── Statistiques ─── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+.stat-card {
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+}
+.stat-card.blue   { background: #dbeafe; }
+.stat-card.green  { background: #dcfce7; }
+.stat-card.red    { background: #fee2e2; }
+.stat-card.yellow { background: #fef9c3; }
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-card.blue   .stat-value { color: #1d4ed8; }
+.stat-card.green  .stat-value { color: #15803d; }
+.stat-card.red    .stat-value { color: #b91c1c; }
+.stat-card.yellow .stat-value { color: #a16207; }
+
+.stat-label { font-size: 0.82rem; color: var(--text-secondary); }
+
+/* ─── Tableau utilisateurs ─── */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--border-input);
+}
+.table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--border-input);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+.table tr:last-child td { border-bottom: none; }
+
+.status { font-weight: 600; font-size: 0.85rem; }
+.status.green { color: #15803d; }
+.status.muted { color: var(--text-muted); }
+
+/* Cellule actions (boutons côte à côte) */
+.actions-cell {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: filter 0.15s;
+  white-space: nowrap;
+}
+.btn-sm:hover { filter: brightness(0.88); }
+.btn-sm.blue  { background: var(--couleur-primaire); }
+.btn-sm.red   { background: #e53935; }
+.btn-sm.green { background: #2e7d32; }
+
+/* ─── Formulaires ─── */
+.forms-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 640px) { .forms-row { grid-template-columns: 1fr; } }
+
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-inline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.form-inline input,
+.form-inline select {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+.form-inline input:focus,
+.form-inline select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  background: var(--bg-input-focus);
+}
+
+.btn-primary {
+  padding: 8px 16px;
+  background: var(--couleur-primaire);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: var(--couleur-primaire-hover); }
+
+.empty { color: var(--text-muted); font-style: italic; font-size: 0.9rem; }

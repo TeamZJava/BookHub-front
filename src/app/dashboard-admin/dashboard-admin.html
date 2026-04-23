@@ -1,0 +1,38 @@
+<div class="page-container">
+
+  <h1 class="page-title">Dashboard Admin</h1>
+
+  <!-- Tableau des utilisateurs -->
+  <div class="section">
+    <h2>Gestion des Utilisateurs</h2>
+    @if (listeUtilisateurs.length === 0) {
+      <p class="empty">Aucun utilisateur chargé.</p>
+    } @else {
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of listeUtilisateurs; track user.id) {
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td class="actions-cell">
+                <button class="btn-sm blue" (click)="changerRole(user.id, user.role)">Changer Rôle</button>
+                <button class="btn-sm red" (click)="supprimerUtilisateur(user.id)">Supprimer</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+
+
+</div>
