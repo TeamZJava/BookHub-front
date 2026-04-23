@@ -250,6 +250,16 @@ textarea:focus {
   font-style: italic;
 }
 
+.btn-signaler {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.4;
+  padding: 0 4px;
+}
+.btn-signaler:hover { opacity: 1; }
+
 @media (max-width: 768px) {
   .book-info {
     flex-direction: column;
