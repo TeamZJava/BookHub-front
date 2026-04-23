@@ -9,7 +9,9 @@
     <div class="navbar-links">
       <a routerLink="/catalogue" routerLinkActive="active">Catalogue</a>
       <a routerLink="/favoris" routerLinkActive="active">Favoris</a>
-      @if (authService.hasRole('LIBRARIAN')) {
+       @if (authService.hasRole('ADMIN')) {
+        <a routerLink="/dashboard-admin" routerLinkActive="active">Dashboard</a>
+      } @else if (authService.hasRole('LIBRARIAN')) {
         <a routerLink="/dashboard-librarian" routerLinkActive="active">Dashboard</a>
       } @else {
         <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
