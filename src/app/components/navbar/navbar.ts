@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoanService } from '../../services/loan.service';
 
@@ -34,13 +34,18 @@ ngOnInit() {
     document.body.classList.add('dark');
   }
 
-  // Vérifie si l'user a des emprunts en retard
-  if (this.isLoggedIn()) {
-    this.loanService.isLate().subscribe({
-      next: (result) => { this.isLate = result; },
-      error: () => { this.isLate = false; },
-    });
-  }
+   // Vérifie les emprunts en retard à chaque changement de route (dont après login)
+  this.router.events.subscribe(event => {
+    if (!(event instanceof NavigationEnd)) return;
+    if (this.isLoggedIn()) {
+      this.loanService.isLate().subscribe({
+        next: (result) => { this.isLate = result; },
+        error: () => { this.isLate = false; },
+      });
+    } else {
+      this.isLate = false;
+    }
+  });
 }
 
   toggleTheme(): void {
