@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BookPage } from '../models/book-page.model';
 import { BookDetailDTO } from '../models/book-detail.model';
-
 @Injectable({ providedIn: 'root' })
 export class BookService {
   // HttpClient : permet de faire des requêtes HTTP vers le back
@@ -49,6 +48,10 @@ export class BookService {
     return this.http.get<string[]>(`${this.apiUrl}/categories`);
   }
 
+  ajouterLivre(livre: object) {
+    return this.http.post(this.apiUrl, livre);
+  }
+
   // Supprime un livre (réservé librarian et admin aussi?))
   deleteBook(id: number) {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
@@ -57,11 +60,26 @@ export class BookService {
   // Envoie une note 1 à 5 sur un livre
   rateBook(bookId: number, note: number) {
     const params = new HttpParams().set('note', note.toString());
-    return this.http.post<void>(`${this.apiUrl}/${bookId}/ratings`, null, { params });
+    return this.http.post(`${this.apiUrl}/${bookId}/ratings`, null, { params, responseType: 'text' });
   }
 
   // Ajoute un commentaire sur un livre
   addComment(bookId: number, comment: string) {
-    return this.http.post<void>(`${this.apiUrl}/${bookId}/comments`, { comment });
+    return this.http.post(`${this.apiUrl}/${bookId}/comments`, { comment }, { responseType: 'text' });
+  }
+
+  // Signale un commentaire comme malveillant
+  signalerCommentaire(bookId: number, commentId: number) {
+    return this.http.put(`${this.apiUrl}/${bookId}/comments/${commentId}/signaler`, null, { responseType: 'text' });
+  }
+
+  // Récupère tous les commentaires signalés
+  getCommentairesSignales() {
+    return this.http.get<any[]>(`${this.apiUrl}/comments/signales`);
+  }
+
+  // Supprime un commentaire
+  supprimerCommentaire(commentId: number) {
+    return this.http.delete(`${this.apiUrl}/comments/${commentId}`, { responseType: 'text' });
   }
 }
