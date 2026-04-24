@@ -4,6 +4,6 @@ import { CommentDTO } from './comment.model';
 export interface BookDetailDTO {
   book: Book;
   comments: CommentDTO[];
-  isFavorite: boolean;
+  favorite: boolean;
   userRating: number | null;
 }
