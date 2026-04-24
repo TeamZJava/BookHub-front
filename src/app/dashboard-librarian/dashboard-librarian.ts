@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { LoanService } from '../services/loan.service';
 import { BookService } from '../services/book.service';
 import { UserService } from '../services/user.service';
 import { LoanDTO } from '../models/loan-dto.model';
 
+// fonction utilitaire pour créer un livre vide
+function livreVide() {
+  return {
+    title: '', author: '', isbn: '', description: '', category: '', coverUrl: '',
+    totalCopies: 1, availableCopies: 1,
+  };
+}
+
 @Component({
   selector: 'app-dashboard-librarian',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, FormsModule],
   templateUrl: './dashboard-librarian.html',
   styleUrl: './dashboard-librarian.css',
 })
@@ -22,6 +31,11 @@ export class DashboardLibrarian implements OnInit {
   listeRetards: any[] = [];
   listeEmprunts: any[] = [];
   topLivres: any[] = [];
+  commentairesSignales: any[] = [];
+
+  // Formulaire ajout livre
+  afficherFormulaire = false;
+  nouveauLivre = livreVide();
 
   constructor(
     private router: Router,
@@ -34,6 +48,7 @@ export class DashboardLibrarian implements OnInit {
     this.chargerEmprunts();
     this.chargerLivres();
     this.chargerUtilisateurs();
+    this.chargerSignalements();
   }
 
   chargerEmprunts(): void {
@@ -77,11 +92,61 @@ export class DashboardLibrarian implements OnInit {
     });
   }
 
-  ajouterLivre()    { this.router.navigate(['/catalogue']);
-    //TODO: faire formulaire pour ajouter un nouveau livre dans le catalogue
-   }
+  chargerSignalements(): void {
+    this.bookService.getCommentairesSignales().subscribe({
+      next: (data) => this.commentairesSignales = data,
+      error: () => this.commentairesSignales = []
+    });
+  }
+
+  supprimerCommentaire(commentId: number): void {
+    this.bookService.supprimerCommentaire(commentId).subscribe({
+      next: () => this.chargerSignalements(),
+      error: () => alert('Erreur lors de la suppression.')
+    });
+  }
+
+  ajouterLivre(): void {
+    this.afficherFormulaire = true;
+  }
+
+  soumettreFormulaire(): void {
+    const n = this.nouveauLivre;
+    const titre = (n.title || '').trim();
+    const auteur = (n.author || '').trim();
+    const isbn = (n.isbn || '').trim();
+    if (!titre || !auteur || !isbn) {
+      alert('Titre, auteur et ISBN sont obligatoires.');
+      return;
+    }
+    const copies = Math.max(1, Math.floor(Number(n.totalCopies)) || 1);
+    const livrePourApi = {
+      title: titre,
+      author: auteur,
+      isbn,
+      category: (n.category || '').trim(),
+      description: (n.description || '').trim(),
+      coverUrl: (n.coverUrl || '').trim(),
+      totalCopies: copies,
+      availableCopies: copies,
+    };
+    this.bookService.ajouterLivre(livrePourApi).subscribe({
+      next: () => {
+        alert('Livre ajouté avec succès !');
+        this.afficherFormulaire = false;
+        this.nouveauLivre = livreVide();
+        this.chargerLivres();
+      },
+      error: () => alert('Erreur lors de l\'ajout du livre.')
+    });
+  }
+
+  annulerFormulaire(): void {
+    this.afficherFormulaire = false;
+    this.nouveauLivre = livreVide();
+  }
   gererCatalogue()  { this.router.navigate(['/catalogue']); }
-  gererUtilisateurs() { this.router.navigate(['/dashboard-admin']); 
-    //TODO: faire dashboard admin
+  gererUtilisateurs() {
+    alert('Une demande a été envoyée à l\'admin.');
   }
 }
