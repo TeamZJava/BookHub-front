@@ -1,4 +1,46 @@
 <main class="page">
+
+  @if (afficherFormulaire) {
+    <div class="overlay">
+      <div class="modal">
+        <h3>Ajouter un livre</h3>
+        <form (ngSubmit)="soumettreFormulaire()" autocomplete="off">
+          <div class="form-field">
+            <label>Titre *</label>
+            <input [(ngModel)]="nouveauLivre.title" name="title" required />
+          </div>
+          <div class="form-field">
+            <label>Auteur *</label>
+            <input [(ngModel)]="nouveauLivre.author" name="author" required />
+          </div>
+          <div class="form-field">
+            <label>ISBN *</label>
+            <input [(ngModel)]="nouveauLivre.isbn" name="isbn" required />
+          </div>
+          <div class="form-field">
+            <label>Catégorie</label>
+            <input [(ngModel)]="nouveauLivre.category" name="category" />
+          </div>
+          <div class="form-field">
+            <label>Description</label>
+            <textarea [(ngModel)]="nouveauLivre.description" name="description"></textarea>
+          </div>
+          <div class="form-field">
+            <label>URL couverture (optionnel)</label>
+            <input [(ngModel)]="nouveauLivre.coverUrl" name="coverUrl" />
+          </div>
+          <div class="form-field">
+            <label>Nombre d'exemplaires *</label>
+            <input type="number" step="1" [(ngModel)]="nouveauLivre.totalCopies" name="totalCopies" min="1" required />
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn-action bleu">Ajouter</button>
+            <button type="button" class="btn-action orange" (click)="annulerFormulaire()">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
   <h2>Dashboard Bibliothécaire</h2>
 
   <section class="carte" aria-label="Statistiques">
@@ -113,6 +155,25 @@
           </div>
         }
       </div>
+    }
+  </section>
+
+
+  <section class="carte" aria-label="Commentaires signalés">
+    <h3>Commentaires Signalés <span class="max">({{ commentairesSignales.length }})</span></h3>
+
+    @if (commentairesSignales.length === 0) {
+      <p class="vide">Aucun commentaire signalé.</p>
+    } @else {
+      @for (c of commentairesSignales; track c.id) {
+        <div class="carte-retard">
+          <div class="infos-emprunt">
+            <span class="titre-livre">ID #{{ c.id }} — {{ c.user.firstName }} {{ c.user.lastName }}</span>
+            <span class="meta">{{ c.comment }}</span>
+          </div>
+          <button class="btn-warn" (click)="supprimerCommentaire(c.id)">Supprimer</button>
+        </div>
+      }
     }
   </section>
 
