@@ -14,7 +14,7 @@
       <div class="book-meta">
         <div class="title-row">
           <h1>{{ detail.book.title }}</h1>
-          <button class="btn-fav" [class.active]="detail.isFavorite" (click)="toggleFavorite()">&#x2764;</button>
+          <button class="btn-fav" [class.active]="detail.favorite" (click)="toggleFavorite()">&#x2764;</button>
         </div>
         <p class="author">{{ detail.book.author }}</p>
         <p class="isbn">ISBN: {{ detail.book.isbn }}</p>
@@ -71,7 +71,9 @@
               <span class="comment-rating">&#x2B50; {{ comment.userRating }}</span>
             }
             @if (comment.reported) {
-              <span class="reported-flag">&#x1F6A9;</span>
+              <span class="reported-flag" title="Signalé">&#x1F6A9;</span>
+            } @else {
+              <button class="btn-signaler" title="Signaler ce commentaire" (click)="signaler(comment.id)">🚩</button>
             }
           </div>
           <p class="comment-text">{{ comment.comment }}</p>
