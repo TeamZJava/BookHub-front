@@ -58,13 +58,13 @@ export class BookDetail implements OnInit {
   toggleFavorite() {
     if (!this.bookDetail) return;
     const bookId = this.bookDetail.book.id;
-    if (this.bookDetail.isFavorite) {
+    if (this.bookDetail.favorite) {
       this.favoriteService.removeFavorite(bookId).subscribe(() => {
-        this.bookDetail!.isFavorite = false;
+        this.bookDetail!.favorite = false;
       });
     } else {
       this.favoriteService.addFavorite(bookId).subscribe(() => {
-        this.bookDetail!.isFavorite = true;
+        this.bookDetail!.favorite = true;
       });
     }
   }
@@ -109,6 +109,15 @@ export class BookDetail implements OnInit {
         this.loadBook(bookId);
       });
     }
+  }
+
+  // Signale un commentaire comme malveillant
+  signaler(commentId: number) {
+    if (!this.bookDetail) return;
+    this.bookService.signalerCommentaire(this.bookDetail.book.id, commentId).subscribe({
+      next: () => this.loadBook(this.bookDetail!.book.id),
+      error: () => alert('Erreur lors du signalement.')
+    });
   }
 
   // Retour au catalogue
